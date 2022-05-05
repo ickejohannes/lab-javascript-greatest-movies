@@ -1,5 +1,4 @@
 // The `movies` array from the file `src/data.js`.
-// console.log('movies: ', movies);
 
 
 // Iteration 1: All directors? - Get the array of all directors.
@@ -28,36 +27,23 @@ function scoresAverage(movies) {
     return 0;
   }
 
-  //this creates an array of the scores
   const scores = movies.map(function (movie) {
     return movie.score;
   })
-  console.log(scores);
 
-  //this adds up all the scores
   const scoreTotal = scores.reduce(function (accumulator, currentValue) {
     if (currentValue === undefined) {
       return accumulator;
     }
     return accumulator + currentValue;
   });
-  console.log(scoreTotal);
 
-  //create average of the score
   const scoreAverage = scoreTotal/scores.length;
 
-  //return rounded average
   return Math.round(scoreAverage * 100) / 100
-
-  /*
-  the failing test
-  
-  it('should return average even if one of the movies does not have score', () => {
-    expect(scoresAverage([{ score: 6 }, { score: '' }, {}])).toBe(2);
-  });
-  */
 }
 scoresAverage([{ score: 6 }, { score: '' }, {}]);
+
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
 function dramaMoviesScore(movies) {
@@ -67,7 +53,6 @@ function dramaMoviesScore(movies) {
 
   return scoresAverage(dramaMovies)
 }
-// console.log(dramaMoviesScore(movies))
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 function orderByYear(movies) {
@@ -79,7 +64,6 @@ function orderByYear(movies) {
   })
   return sortedArray;
 }
-// console.log(orderByYear(movies));
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
 function orderAlphabetically(movies) {
@@ -94,10 +78,26 @@ function orderAlphabetically(movies) {
 
   return titles;
 }
-//console.log(orderAlphabetically(movies));
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
-function turnHoursToMinutes() {}
+function turnHoursToMinutes(array) {
+  const newArray = [...array]
+
+  for (let i = 0; i<newArray.length; i += 1) {
+    let durationInMinutes = newArray[i].duration[0]*60
+    console.log(newArray[i].duration.includes("min"))
+    if (newArray[i].duration.includes("min")) {
+      let minutesWithWord = newArray[i].duration.split(" ")[1];
+      let minutesWithoutWord = minutesWithWord.split("min")[0];
+
+      durationInMinutes += parseInt(minutesWithoutWord);
+    }
+    newArray[i].duration = durationInMinutes;
+  }
+
+  return newArray;
+}
+// turnHoursToMinutes(movies);
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
 function bestYearAvg() {}
